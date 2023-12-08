@@ -9,5 +9,5 @@ net.add_nodes(df.index)
 
 # df = arch
 
-
+net.show_buttons(filter_='physics')
 net.show('aa.html')
