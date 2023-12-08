@@ -77,13 +77,14 @@ for word in archList:
     for match in rerativList:
         archDf.loc[word, match] += 1
     
+archDf.to_csv('mapArchitects.csv', index=True)  # index=Trueで行のインデックスを含める
 
 
 
-from sqlalchemy import create_engine
+# from sqlalchemy import create_engine
 
-# SQLiteデータベースに接続
-engine = create_engine('sqlite:///architects.db')  # データベース名を指定してください
+# # SQLiteデータベースに接続
+# engine = create_engine('sqlite:///architects.db')  # データベース名を指定してください
 
-# DataFrameをSQLiteデータベースに書き込む
-archDf.to_sql('architects_table', con=engine)
+# # DataFrameをSQLiteデータベースに書き込む
+# archDf.to_sql('architects_table', con=engine)
