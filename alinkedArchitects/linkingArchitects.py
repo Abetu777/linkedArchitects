@@ -17,7 +17,7 @@ for i in list(df.index):
     for j in list(df.columns):
         if df.loc[i][j] != 0:
             net.add_edge(i, j)
-        
+
 
 net.show_buttons()
 net.show('linkedArchitects.html')
