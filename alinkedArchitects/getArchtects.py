@@ -1,5 +1,6 @@
 import re
 import requests
+import pandas as pd
 
 
 def get_architects_list():
@@ -32,4 +33,11 @@ archList = []
 for match in matches:
     archList.append(match)
 
-print(len(archList))
+archList = list(dict.fromkeys(archList))
+
+archDf = pd.DataFrame(index=archList, columns=archList)
+archDf = archDf.fillna(0)
+
+archDf.to_csv('mapArchitects.csv')
+
+

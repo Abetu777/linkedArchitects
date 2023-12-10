@@ -1,12 +1,7 @@
 import pandas as pd
-from getArchtects import archList
+from getArchtects import archDf,archList
 import requests
 import re
-
-
-# 行と列にそれぞれarchListの入った空のDataFrameを作成
-archDf = pd.DataFrame(index=archList, columns=archList)
-archDf = archDf.fillna(0)
 
 def getRerativArchitects(word: str):
     url = "https://ja.wikipedia.org/w/api.php"
@@ -38,6 +33,7 @@ def getRerativArchitects(word: str):
             rerativList.append(match)
 
     return rerativList
+
 i=0
 for word in archList:
     rerativList = getRerativArchitects(word)
@@ -50,13 +46,3 @@ for word in archList:
             pass
 
             # archDf[word][match] += 1
-
-
-
-
-
-
-    
-archDf.to_csv('mapArchitects.csv', index=True)  # index=Trueで行のインデックスを含める
-
-

@@ -16,4 +16,4 @@ df = pd.DataFrame(data, index=index, columns=columns)
 
 for i in df.index:
     for j in df.columns:
-        print(df.loc[i][j])
+        print(i, j, df.loc[i][j])
