@@ -1,7 +1,12 @@
 import pandas as pd
-from getArchtects import archDf,archList
 import requests
 import re
+from getArchtects import archDf, archList
+
+
+
+
+#一覧のリストからそれぞれのWikipediaのページに行きそのページの中に一覧のリストにある名前があればそれを抽出する
 
 def getRerativArchitects(word: str):
     url = "https://ja.wikipedia.org/w/api.php"
@@ -34,7 +39,8 @@ def getRerativArchitects(word: str):
 
     return rerativList
 
-i=0
+
+
 for word in archList:
     rerativList = getRerativArchitects(word)
     for match in rerativList:
@@ -42,7 +48,4 @@ for word in archList:
             print(f"インデックス '{match}' が列に見つかりませんでした。")
             continue  # 処理を中断して次のループに進む
         else:
-            i += 1
-            pass
-
-            # archDf[word][match] += 1
+            archDf.loc[word][match] += 1

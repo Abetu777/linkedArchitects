@@ -22,7 +22,7 @@ def get_architects_list():
     else:
         return content
     
-    
+
 
 content = get_architects_list()
 
@@ -34,6 +34,7 @@ archList = []
 # 抽出された文字列を出力
 for match in matches:
     archList.append(match)
+
 
 archList = list(dict.fromkeys(archList))
 
