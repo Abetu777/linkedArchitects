@@ -21,6 +21,8 @@ def get_architects_list():
         return None
     else:
         return content
+    
+    
 
 content = get_architects_list()
 
