@@ -3,43 +3,10 @@ from getArchtects import archList
 import requests
 import re
 
-archList = archList[0:21]
 
 # 行と列にそれぞれarchListの入った空のDataFrameを作成
 archDf = pd.DataFrame(index=archList, columns=archList)
 archDf = archDf.fillna(0)
-# print(archDf)
-
-
-#archListから一つづつその人のぺーじにいく。そのページの中からリンクがあるものを抽出する。そこからarchListに入っている単語を選ぶ。その要素に＋１する。
-
-# def getRerativArchitects(word:str):
-#     url = "https://ja.wikipedia.org/w/api.php"
-
-#     # ページのタイトルを指定
-#     params = {
-#         "action": "parse",
-#         "page": word,
-#         "format": "json",
-#         "prop": "wikitext"
-#     }
-
-#     response = requests.get(url, params=params)
-#     data = response.json()
-#     content = data['parse']['wikitext']['*']
-
-#     matches = re.findall(r'\[\[(.*?)\]\]', content)
-#     rerativList = []
-#     # 抽出された文字列を出力
-#     for match in matches:
-#         if match in archList:
-#             rerativList.append(match)
-
-#     if 'error' in data:
-#         print("エラーが発生しました:", data['error']['info'])
-#         return None
-#     else:
-#         return rerativList
 
 def getRerativArchitects(word: str):
     url = "https://ja.wikipedia.org/w/api.php"
@@ -52,7 +19,8 @@ def getRerativArchitects(word: str):
         "prop": "wikitext"
     }
 
-    response = requests.get(url, params=params)
+    response = requests.get(url, params=params, timeout=10)
+
     data = response.json()
 
     # 'parse'キーが存在するかどうかをチェックし、存在しない場合は空のリストを返す
@@ -70,21 +38,25 @@ def getRerativArchitects(word: str):
             rerativList.append(match)
 
     return rerativList
-
-
+i=0
 for word in archList:
     rerativList = getRerativArchitects(word)
     for match in rerativList:
-        archDf.loc[word, match] += 1
+        if match not in archList:  # インデックスが列に存在しない場合
+            print(f"インデックス '{match}' が列に見つかりませんでした。")
+            continue  # 処理を中断して次のループに進む
+        else:
+            i += 1
+            pass
+
+            # archDf[word][match] += 1
+
+
+
+
+
+
     
 archDf.to_csv('mapArchitects.csv', index=True)  # index=Trueで行のインデックスを含める
 
 
-
-# from sqlalchemy import create_engine
-
-# # SQLiteデータベースに接続
-# engine = create_engine('sqlite:///architects.db')  # データベース名を指定してください
-
-# # DataFrameをSQLiteデータベースに書き込む
-# archDf.to_sql('architects_table', con=engine)
