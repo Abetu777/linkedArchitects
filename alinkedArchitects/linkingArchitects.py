@@ -1,9 +1,7 @@
 from pyvis.network import Network
 import pandas as pd
 
-
-
-df = pd.read_csv('linkedArchitects/alinkedArchitects/mapArchitects.csv', index_col=0)
+df = pd.read_csv('mapArchitects2.csv', index_col=0)
 
 df = df.head(10)
 
@@ -15,8 +13,10 @@ for i in df.columns:
 # Add edges
 for i in list(df.index):
     for j in list(df.columns):
-        if df.loc[i][j] != 0:
-            net.add_edge(i, j)
+        if df.loc[i][j] == 0:
+            pass
+        else:
+            net.add_edge(i, j, width=int(df.loc[i][j]))
 
 
 net.show_buttons()

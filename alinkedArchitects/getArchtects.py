@@ -35,12 +35,14 @@ archList = []
 for match in matches:
     archList.append(match)
 
+#Wikipediaの使用で同姓同名の人がいる場合｜で区切って職業などを表記するためそれを取り除く
+archList = [name.split("|")[0] if "|" in name else name for name in archList]
 
 archList = list(dict.fromkeys(archList))
+archList = archList[1:500]
 
 archDf = pd.DataFrame(index=archList, columns=archList)
 archDf = archDf.fillna(0)
 
-archDf.to_csv('mapArchitects.csv')
 
 
