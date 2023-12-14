@@ -25,9 +25,6 @@ for i in list(df.index):
             net.add_node(j)
             net.add_edge(i, j, width=int(df.loc[i][j]))
             
-
-
-
 net.show_buttons(filter_=['physics'])
 net.show('linkedArchitects.html')
 
