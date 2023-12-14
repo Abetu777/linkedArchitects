@@ -39,10 +39,12 @@ for match in matches:
 archList = [name.split("|")[0] if "|" in name else name for name in archList]
 
 archList = list(dict.fromkeys(archList))
-archList = archList[1:500]
+
 
 archDf = pd.DataFrame(index=archList, columns=archList)
 archDf = archDf.fillna(0)
+
+
 
 
 
