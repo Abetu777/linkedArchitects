@@ -1,0 +1,4 @@
+1.getArchitectsを実行
+2.aechArchitectsを実行
+3.linkedArchitextsを実行
+4.生成されたhtmlファイルをブラウザで開く
